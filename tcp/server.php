@@ -2,17 +2,36 @@
 $server = new swoole_server('0.0.0.0', 9501);
 
 $server->on('connect', function($serv, $fd) {
-    $serv->send($fd, "Hello, client {$fd}!");
+    $serv->send($fd, "Hello, client {$fd}!\n");
+    broadcast($serv, $fd, "client {$fd} comes in");
 });
 
 $server->on('receive', function($serv, $fd, $from_id, $data) {
-    $serv->send($fd, "Server got data from {$fd}-{$from_id}!"); // 应答
     echo microtime(true), ", got data: \"{$data}\"\n";
+    broadcast($serv, $fd, $data);
+    //$serv->send($fd, "Server got data from {$fd}-{$from_id}!"); // 应答
 });
 
 $server->on('close', function($serv, $fd) {
-    echo "{$fd} gone";
+    echo "{$fd} gone\n";
+    broadcast($serv, $fd, "client {$fd} gone");
 });
 
 $server->start();
 
+
+function broadcast($serv, $from_fd, $data) {
+    if (empty(trim($data))) {
+        return;
+    }
+    $client_fds = $serv->connection_list();
+    foreach ($client_fds as $client_fd) {
+        if (true || $client_fd != $from_fd) {
+            if ($serv->exist($client_fd)) {
+                $serv->send($client_fd, "client {$from_fd} says: {$data}\n");
+            } else {
+                echo "bad client {$client_fd}!!";
+            }
+        }   
+    }  
+}

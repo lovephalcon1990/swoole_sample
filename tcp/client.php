@@ -10,13 +10,13 @@ $client->on('error', function($cli) {
 });
 
 $client->on('receive', function($cli, $data) {
-    $cli->send('Client got data from server!'); // 应答
+    //$cli->send('Client got data from server!'); // 应答
     echo microtime(true), ", {$data}\n";
-    sleep(1);
+    //sleep(1);
 });
 
 $client->on('close', function($cli) {
-    $cli->send('bye!');
+    //$cli->send('bye!');
 });
 
 $client->connect('127.0.0.1', 9501, 1);
