@@ -22,3 +22,10 @@ $client->on('close', function($cli) {
 $client->connect('127.0.0.1', 9501, 1);
 
 
+function read() {
+    $fp = fopen('php://stdin', 'r'); 
+    $input = fgets($fp, 255); 
+    fclose($fp); 
+    return $input; 
+}
+

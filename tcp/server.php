@@ -26,7 +26,7 @@ function broadcast($serv, $from_fd, $data) {
     }
     $client_fds = $serv->connection_list();
     foreach ($client_fds as $client_fd) {
-        if (true || $client_fd != $from_fd) {
+        if ($client_fd != $from_fd) {
             if ($serv->exist($client_fd)) {
                 $serv->send($client_fd, "client {$from_fd} says: {$data}\n");
             } else {
