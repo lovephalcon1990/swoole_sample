@@ -31,4 +31,3 @@ function read() {
     fclose($fp); 
     return $input; 
 }
-

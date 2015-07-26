@@ -10,12 +10,10 @@ $server->on('receive', function($serv, $fd, $from_id, $data) {
     $data = trim($data);
     echo microtime(true), ", got data: \"{$data}\"\n";
     broadcast($serv, $fd, $data);
-    //$serv->send($fd, "Server got data from {$fd}-{$from_id}!"); // 应答
 });
 
 $server->on('close', function($serv, $fd) {
     echo "{$fd} gone\n";
-    // broadcast($serv, $fd, "client {$fd} gone");
     broadcast($serv, $fd, 'bye bye');
 });
 
