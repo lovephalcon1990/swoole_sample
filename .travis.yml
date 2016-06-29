@@ -7,9 +7,8 @@ php:
     - '7.0'
 
 before_script:
-    - cd ./tests
-    - sudo ./travis.sh
-    - phpenv config-add ./php-config.ini
+    - ./tests/travis.sh
+    - phpenv config-add ./tests/php-config.ini
 
 script:
     - cd ./tests
