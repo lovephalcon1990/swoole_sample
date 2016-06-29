@@ -12,4 +12,4 @@ before_script:
     - phpenv config-add ./php-config.ini
 
 script:
-    - php ./test_extension_loaded.php
+    - php ./test.php

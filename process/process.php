@@ -3,8 +3,8 @@ declare(ticks = 1);
 pcntl_signal(SIGTERM, 'Process::sign_handler');
 pcntl_signal(SIGCHLD, 'Process::sign_handler');
 
-(new Process())->handler();
-exit();
+// (new Process())->handler();
+// exit();
 
 class Process {
     const MAX_WORKER_NUM   = 5;
