@@ -6,7 +6,7 @@ pcntl_signal(SIGCHLD, 'Process::sign_handler');
 // (new Process())->handler();
 // exit();
 
-class Process {
+abstract class Process {
     const MAX_WORKER_NUM   = 5;
     const RECHECK_INTERVAL = 15; // seconds
 
